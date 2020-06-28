@@ -35,6 +35,8 @@ public:
     ~CCamadaDensa() = default;
 
     //Getters
+    int GetNumInputs();
+    int GetNumNeuronios();
     Matriz GetZ();
     Matriz GetSaida();
     Matriz GetPesos();

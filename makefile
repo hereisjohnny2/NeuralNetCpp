@@ -28,9 +28,11 @@ CC_VERSION=c++14
 CC_FLAGS=-c			\
 		 -W 		\
 		 -Wall		\
+		 -g			\
 		 -ansi		\
 		 -pedantic	\
 		 -std=$(CC_VERSION)
+
 
 #Define o comando do shell para remover arquivos
 #	rm			-> comando para remover arquivos
@@ -64,6 +66,6 @@ clean:
 	@ rmdir objects
 
 memcheck:
-	valgrind --leak-check=yes -s ./$(EXE_NAME)
+	valgrind --leak-check=yes ./$(EXE_NAME)
 
 .PHONY: all clean

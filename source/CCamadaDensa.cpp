@@ -8,6 +8,14 @@ CCamadaDensa::CCamadaDensa(int _numInputs, int _numNeuronios, CAtivacao* _ativac
     pesos = pesos*0.01;
 }
 
+int CCamadaDensa::GetNumInputs() {
+    return numInputs;
+}
+
+int CCamadaDensa::GetNumNeuronios() {
+    return numNeuronios;
+}
+
 Matriz CCamadaDensa::GetZ() {
     return saida;
 }

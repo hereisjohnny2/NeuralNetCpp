@@ -73,13 +73,23 @@ void CRedeNeural::SGD(const Matriz& X, const Matriz& y)
             mini_batchY.push_back(y_temp);
         }
 
-        Matriz Erro(mTamMiniBatch, y.GetNumColunas());
         for (int i = 0; i < numMiniBatches; i++)
         {
-            for (int l = mNumCamadas; l > 0; l--)
+
+            vector<Matriz> ErrosDaRede;
+
+            Matriz ErroUltimaCamada(mTamMiniBatch, y.GetNumColunas());
+            ErroUltimaCamada = (FeedForward(mini_batchX[i]) - mini_batchY[i]);
+            ErroUltimaCamada = ErroUltimaCamada.Hardmard(mCamadas[mNumCamadas - 1].DSigmaZ());
+            ErrosDaRede.push_back(ErroUltimaCamada);
+
+            for (int l = mNumCamadas - 1; l > 0; l--) 
             {
-                Erro = (FeedForward(mini_batchX[i]) - mini_batchY[i]);
-                Erro = Erro.Hardmard(mCamadas[l - 1].DSigmaZ());
+                Matriz ErroCamada(mTamMiniBatch, mCamadas[l].GetNumInputs());
+                ErroCamada = ErrosDaRede[0] * mCamadas[l].GetPesos().CalculaTransposta();
+                ErroCamada = ErroCamada.Hardmard(mCamadas[l - 1].DSigmaZ());
+                ErrosDaRede.insert(ErrosDaRede.begin(), ErroCamada);
+                std::cout << ErroCamada << std::endl;
             }
         }
 
