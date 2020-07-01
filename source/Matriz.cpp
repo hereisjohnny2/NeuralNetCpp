@@ -206,6 +206,22 @@ Matriz Matriz::CalculaTransposta() {
     return Saida;
 }
 
+int Matriz::GetLinhaMaiorElemento() {
+    double Maior = fabs(mData[0][0]);
+    int linhaMaiorElemento = 0;
+    for (int i = 0; i < mLinhas; i++)
+    {
+        for (int j = 0; j < mColunas; j++)
+        {
+            if (fabs(mData[i][j]) > Maior) {
+                Maior = mData[i][j];
+                linhaMaiorElemento = i;
+            }
+        }   
+    }
+    return linhaMaiorElemento;
+}
+
 //Sobrescreve o método de colchetes. Desse forma é possível acessar o ponteiro que armazena a linha no índice dado (index_linha). Como ponteiros já suportam nativamente o operador de conchetes, para acessar um determinado elemento na possivel i,j, sendo i o numero da linha e j o número da coluna, basta escrever A[i][j]. Note que o acesso ao elemento é baseado no 0, ou seja, o index do primeiro elemento será 0, e o índice do ultimo será N-1, tal que N é o número de linhas.
 double* Matriz::operator[](int index_linha) {
     assert(index_linha > -1);

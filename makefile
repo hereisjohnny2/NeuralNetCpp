@@ -17,7 +17,7 @@ OBJ=$(subst .cpp,.o,$(subst source,objects,$(CPP_SOURCE)))
 CC=g++
 
 #Define a versão da linguagem
-CC_VERSION=c++14
+CC_VERSION=c++17
 
 #Define a as flags utilizadas junto com o compilador
 #	-c			-> 
@@ -28,9 +28,11 @@ CC_VERSION=c++14
 CC_FLAGS=-c			\
 		 -W 		\
 		 -Wall		\
+		 -g			\
 		 -ansi		\
 		 -pedantic	\
 		 -std=$(CC_VERSION)
+
 
 #Define o comando do shell para remover arquivos
 #	rm			-> comando para remover arquivos
@@ -64,6 +66,6 @@ clean:
 	@ rmdir objects
 
 memcheck:
-	valgrind --leak-check=yes -s ./$(EXE_NAME)
+	valgrind --leak-check=yes ./$(EXE_NAME)
 
 .PHONY: all clean

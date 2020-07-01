@@ -25,8 +25,9 @@ public:
     void Zeros();
     Matriz Shuffle(int seed=0);
     void RandUniforme(double limiteInf = -1.0, double limiteSup = 1.0);
-    void RandNormal(double media = 0.0, double desvioPadrao = 1.0);
+    void RandNormal(double media = 0, double desvioPadrao = 1.0);
     Matriz CalculaTransposta();
+    int GetLinhaMaiorElemento();
 
     double* operator[](int index_linha);
     double& operator()(int index_linha, int index_coluna);

@@ -1,8 +1,4 @@
-#include <iostream>
-
-#include "headers/CCamadaDensa.hpp"
-#include "headers/SpiralData.hpp"
-#include "headers/CAtivacaoReLU.hpp"
+#include "headers/CMNIST.hpp"
 #include "headers/CRedeNeural.hpp"
 
 using std::vector;
@@ -10,22 +6,19 @@ using std::vector;
 int main()
 {
 
-    const int pontos {20}, classes {3};
+    int epocas = 30, tamMiniBatch = 10;
+    double eta = 0.1;
 
-    SpiralData Data = SpiralData(pontos, classes);
-    Data.CriarDados();
 
-    CAtivacaoReLU ativacao;
-    CCamadaDensa camada1(2,4, &ativacao);
-    CCamadaDensa camada2(4,3, &ativacao);
+    CMNIST mnistData("MNIST/train.csv", "MNIST/test.csv");
+    
+    int tamCamadas[] {784, 30, 10};
+    int numCamadas = sizeof(tamCamadas)/sizeof(tamCamadas[0]);
+    
+    CRedeNeural Net(epocas, tamMiniBatch, eta, numCamadas, tamCamadas);
 
-    vector<CCamadaDensa> camadas {
-        camada1,
-        camada2
-    };
-
-    CRedeNeural redeNeural(camadas, 1, 10, 0.25);
-    redeNeural.SGD(Data.GetX(), Data.GetYVec());
+    Net.SGD(mnistData.GetTreinoX(), mnistData.GetTreinoY(), mnistData.GetTesteX(), mnistData.GetTesteY());
+    
     
     return 0;
 }
