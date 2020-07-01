@@ -1,4 +1,4 @@
-# NeurlNetCpp
+# NeuralNetCpp
 
 Como forma de iniciar meus estudos em desenvolvimento C++ e em inteligência artificial, crie este projeto baseado no livro "Neural Networks and Deep Learning", de Michael Nielsen.
 
